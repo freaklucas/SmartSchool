@@ -25,9 +25,18 @@ namespace SmartSchool.Controllers {
       return Ok(Students);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("byId/{id}")]
     public IActionResult GetById(int id){
       var student = Students.FirstOrDefault(a => a.Id == id);
+      if(student == null) return BadRequest("Aluno não encontrado!"); 
+      
+      return Ok(student);
+    }
+    [HttpGet("byName")]
+    public IActionResult GetByName(string name, string lastName){
+      var student = Students.FirstOrDefault(
+        a => a.Name.Contains(name) && a.LastName.Contains(lastName));
+        
       if(student == null) return BadRequest("Aluno não encontrado!"); 
       
       return Ok(student);
