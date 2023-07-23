@@ -1,8 +1,9 @@
+using System.Collections.Generic;
+
 namespace SmartSchool.Models {
   public class Student {
-    
     public Student() {}
-    public Student(int id, string name, strint lastName, string numberPhone) {
+    public Student(int id, string name, string lastName, string numberPhone) {
       this.Id = id;
       this.Name = name;
       this.LastName = lastName;
@@ -14,5 +15,6 @@ namespace SmartSchool.Models {
     public string LastName {get; set;}
     public string NumberPhone { get; set; }
 
+    public IEnumerable<StudentDiscipline> StudentsDisciplines { get; set; }
   }
 }

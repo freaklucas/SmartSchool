@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nkn06Zpke9N56SK/DXfiuJOKUUzfRs9v1R0jDNV+G0jHYkDZd4+a6hxi1bDfWLhC/4PKwd1ssbCufQmJMfxWCQ==",
+  "dgSpecHash": "g7W/8C8LInh7PJXmLrsqhP8v93RDj6AVIjydD0QRNHTypiKs7ayMD9CePxhD7LYA1cTFKOAfB2QgDxGpvBodfw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lucas\\Documents\\SmartSchool\\SmartSchool\\SmartSchool.csproj",
+  "projectFilePath": "c:\\Users\\lucas\\Documents\\SmartSchool\\SmartSchool\\SmartSchool.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucas\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.9\\microsoft.aspnetcore.openapi.7.0.9.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
