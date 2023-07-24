@@ -5,7 +5,7 @@ namespace SmartSchool.Controllers {
   [Route("api/[controller]")]
   public class TeacherController : ControllerBase {
     public TeacherController(){}
-
+  
     [HttpGet]
     public IActionResult Get(){
       return Ok("Professores: Isvanildo, Edvilso, Murilo");

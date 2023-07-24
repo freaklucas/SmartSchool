@@ -32,14 +32,36 @@ namespace SmartSchool.Controllers {
       
       return Ok(student);
     }
+
     [HttpGet("byName")]
     public IActionResult GetByName(string name, string lastName){
       var student = Students.FirstOrDefault(
         a => a.Name.Contains(name) && a.LastName.Contains(lastName));
-        
+
       if(student == null) return BadRequest("Aluno não encontrado!"); 
       
       return Ok(student);
+    }
+
+    [HttpPost]
+    public IActionResult PostStudent(Student student){
+      return Ok(student);
+    }
+
+    
+    [HttpPatch("{id}")]
+    public IActionResult PatchStudent(int id, Student student){
+      return Ok(student);
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult PutStudent(int id, Student student){
+      return Ok(student);
+    }
+    
+    [HttpDelete("{id}")]
+    public IActionResult DeleteStudent(int id){
+      return Ok(id);
     }
   }
 }

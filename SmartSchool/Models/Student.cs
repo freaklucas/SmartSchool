@@ -12,7 +12,7 @@ namespace SmartSchool.Models {
     public string Name { get; set; }
     public string LastName {get; set;}
     public string NumberPhone { get; set; }
-    public IEnumerable<StudentDiscipline> StudentsDisciplines { get; set; }
+    public IEnumerable<StudentDiscipline>? StudentsDisciplines { get; set; }
 
         public static implicit operator List<object>(Student v)
         {
