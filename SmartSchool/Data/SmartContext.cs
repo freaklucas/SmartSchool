@@ -11,8 +11,6 @@ namespace SmartSchool.Data {
 
     protected override void OnModelCreating(ModelBuilder builder) {
       builder.Entity<StudentDiscipline>().HasKey(AD => new {AD.StudentId, AD.DisciplineId}); // relacao mts pra mts
-
     }
-
   }
 }
