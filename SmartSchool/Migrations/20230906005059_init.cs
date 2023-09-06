@@ -2,6 +2,8 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace SmartSchool.Migrations
 {
     /// <inheritdoc />
@@ -80,6 +82,74 @@ namespace SmartSchool.Migrations
                         principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Students",
+                columns: new[] { "Id", "LastName", "Name", "NumberPhone" },
+                values: new object[,]
+                {
+                    { 1, "Kent", "Marta", "33225555" },
+                    { 2, "Isabela", "Paula", "3354288" },
+                    { 3, "Antonia", "Laura", "55668899" },
+                    { 4, "Maria", "Luiza", "6565659" },
+                    { 5, "Machado", "Lucas", "565685415" },
+                    { 6, "Alvares", "Pedro", "456454545" },
+                    { 7, "José", "Paulo", "9874512" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Teachers",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Lauro" },
+                    { 2, "Roberto" },
+                    { 3, "Ronaldo" },
+                    { 4, "Rodrigo" },
+                    { 5, "Alexandre" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Disciplines",
+                columns: new[] { "Id", "Name", "TeacherId" },
+                values: new object[,]
+                {
+                    { 1, "Matemática", 1 },
+                    { 2, "Física", 2 },
+                    { 3, "Português", 3 },
+                    { 4, "Inglês", 4 },
+                    { 5, "Programação", 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StudentsDisciplines",
+                columns: new[] { "DisciplineId", "StudentId" },
+                values: new object[,]
+                {
+                    { 2, 1 },
+                    { 4, 1 },
+                    { 5, 1 },
+                    { 1, 2 },
+                    { 2, 2 },
+                    { 5, 2 },
+                    { 1, 3 },
+                    { 2, 3 },
+                    { 3, 3 },
+                    { 1, 4 },
+                    { 4, 4 },
+                    { 5, 4 },
+                    { 4, 5 },
+                    { 5, 5 },
+                    { 1, 6 },
+                    { 2, 6 },
+                    { 3, 6 },
+                    { 4, 6 },
+                    { 1, 7 },
+                    { 2, 7 },
+                    { 3, 7 },
+                    { 4, 7 },
+                    { 5, 7 }
                 });
 
             migrationBuilder.CreateIndex(
