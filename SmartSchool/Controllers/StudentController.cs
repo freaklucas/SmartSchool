@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SmartSchool.Data;
 using SmartSchool.Models;
 
@@ -36,23 +37,44 @@ namespace SmartSchool.Controllers {
 
     [HttpPost]
     public IActionResult PostStudent(Student student){
-      return Ok(student);
-    }
+      _context.Add(student);
+      _context.SaveChanges();
 
-    
-    [HttpPatch("{id}")]
-    public IActionResult PatchStudent(int id, Student student){
       return Ok(student);
     }
 
     [HttpPut("{id}")]
     public IActionResult PutStudent(int id, Student student){
+      var studentExists = _context.Students.AsNoTracking().FirstOrDefault(s => s.Id == id);
+      if(studentExists == null) return BadRequest("Aluno não existe!");
+      
+      _context.Update(student);
+      _context.SaveChanges(); 
+
       return Ok(student);
     }
     
+    [HttpPatch("{id}")]
+    public IActionResult PatchStudent(int id, Student student){
+      var studentExists = _context.Students.AsNoTracking().FirstOrDefault(s => s.Id == id);
+      if(studentExists == null) return BadRequest("Aluno não existe!");
+      
+      _context.Update(student);
+      _context.SaveChanges();
+
+      return Ok(student);
+    }
+
+    
     [HttpDelete("{id}")]
     public IActionResult DeleteStudent(int id){
-      return Ok(id);
+      var student = _context.Students.FirstOrDefault(s => s.Id == id);
+      if(student == null) return BadRequest("Aluno não existe!");
+
+      _context.Remove(student);
+      _context.SaveChanges();
+
+      return Ok(student);
     }
   }
 }
