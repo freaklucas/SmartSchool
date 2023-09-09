@@ -70,7 +70,9 @@ namespace SmartSchool.Controllers
 
                 return Ok(teacher); 
             }
-            catch(System.Exception) {
+            catch(Exception e) {
+                Console.WriteLine(e.ToString());
+
                 throw;
             }
         }
