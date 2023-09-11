@@ -10,8 +10,11 @@ namespace SmartSchool.Controllers
     public class TeacherController : ControllerBase
     {
         private readonly SmartContext _context; 
-        public TeacherController(SmartContext context) {
+        public  readonly IRepository _repo;
+
+        public TeacherController(SmartContext context, IRepository repo) {
             _context = context;
+            _repo = repo;
         }
 
         [HttpGet]
@@ -65,14 +68,15 @@ namespace SmartSchool.Controllers
         [HttpPost]
         public IActionResult PostTeacher(Teacher teacher) {
             try {
-                _context.Add(teacher);
-                _context.SaveChanges();
-
-                return Ok(teacher); 
+                _repo.Add(teacher);
+            if(_repo.SaveChanges()) {
+                return  Ok(teacher);
             }
-            catch(Exception e) {
-                Console.WriteLine(e.ToString());
-
+            return BadRequest("Aluno não foi cadastrado!");
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+                
                 throw;
             }
         }
@@ -81,15 +85,19 @@ namespace SmartSchool.Controllers
         public IActionResult PutTeacher(int id, Teacher teacher) {
             try
             {
-                var teacherSearch = _context.Teachers.AsNoTracking().FirstOrDefault(
+                var teacherSearch = _context.Teachers
+                    .AsNoTracking()
+                    .FirstOrDefault(
                     t => t.Id == id
                 );
                 if(teacherSearch == null) return BadRequest("Professor não existe!");
+                
+                _repo.Update(teacher);
+                if(_repo.SaveChanges()) {
+                    return  Ok(teacher);
+                }
 
-                _context.Update(teacher);
-                _context.SaveChanges();
-
-                return Ok(teacher);
+                return BadRequest("Professor não foi cadastrado!");
             }
             catch (System.Exception)
             {
@@ -101,15 +109,18 @@ namespace SmartSchool.Controllers
         public IActionResult PatchTeacher(int id, Teacher teacher) {
             try
             {
-                var teacherSearch = _context.Teachers.AsNoTracking().FirstOrDefault(
+                var teacherSearch = _context.Teachers
+                    .AsNoTracking()
+                    .FirstOrDefault(
                     t => t.Id == id
                 );
                 if(teacherSearch == null) return BadRequest("Professor não existe!");
+                _repo.Patch(teacher);
+                if(_repo.SaveChanges()) {
+                    return  Ok(teacher);
+                } 
 
-                _context.Update(teacher);
-                _context.SaveChanges();
-
-                return Ok(teacher);
+                return BadRequest("Professor não foi cadastrado!");
             }
             catch (System.Exception)
             {
@@ -121,15 +132,18 @@ namespace SmartSchool.Controllers
         public IActionResult DeleteTeacher(int id) {
             try
             {
-                var teacherSearch = _context.Teachers.AsNoTracking().FirstOrDefault(
+                var teacherSearch = _context.Teachers
+                    .AsNoTracking()
+                    .FirstOrDefault(
                     t => t.Id == id
                 );
                 if(teacherSearch == null) return BadRequest("Professor não existe!");
+                _repo.Delete(teacherSearch);
+                if(_repo.SaveChanges()) {
+                    return Ok(teacherSearch);
+                } 
 
-                _context.Remove(teacherSearch);
-                _context.SaveChanges();
-
-                return Ok(teacherSearch);
+                return BadRequest("Professor não foi cadastrado!");
             }
             catch (System.Exception)
             {

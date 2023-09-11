@@ -8,8 +8,10 @@ namespace SmartSchool.Controllers {
   [Route("api/[controller]")]
   public class StudentController : ControllerBase {
     private readonly SmartContext _context;
-    public StudentController(SmartContext context) {
+    public  readonly IRepository _repo;
+    public StudentController(SmartContext context, IRepository repo) {
       _context = context;
+      _repo = repo;
     }
 
     [HttpGet]
@@ -37,32 +39,37 @@ namespace SmartSchool.Controllers {
 
     [HttpPost]
     public IActionResult PostStudent(Student student){
-      _context.Add(student);
-      _context.SaveChanges();
+      _repo.Add(student);
+      if(_repo.SaveChanges()) 
+        return  Ok(student);
 
-      return Ok(student);
+      return BadRequest("Aluno não foi cadastrado!");
     }
 
     [HttpPut("{id}")]
     public IActionResult PutStudent(int id, Student student){
-      var studentExists = _context.Students.AsNoTracking().FirstOrDefault(s => s.Id == id);
-      if(studentExists == null) return BadRequest("Aluno não existe!");
+      var studentExists = _context.Students.
+        AsNoTracking().
+        FirstOrDefault(s => s.Id == id);
       
-      _context.Update(student);
-      _context.SaveChanges(); 
+      _repo.Update(student);
+      if(_repo.SaveChanges()) 
+        return  Ok(student);
 
-      return Ok(student);
+      return BadRequest("Aluno não foi cadastrado!");
     }
     
     [HttpPatch("{id}")]
     public IActionResult PatchStudent(int id, Student student){
-      var studentExists = _context.Students.AsNoTracking().FirstOrDefault(s => s.Id == id);
-      if(studentExists == null) return BadRequest("Aluno não existe!");
+      var studentExists = _context.Students
+        .AsNoTracking()
+        .FirstOrDefault(s => s.Id == id);
       
-      _context.Update(student);
-      _context.SaveChanges();
+      _repo.Patch(student);
+      if(_repo.SaveChanges()) 
+        return  Ok(student);
 
-      return Ok(student);
+      return BadRequest("Aluno não foi cadastrado!");
     }
 
     
@@ -71,10 +78,11 @@ namespace SmartSchool.Controllers {
       var student = _context.Students.FirstOrDefault(s => s.Id == id);
       if(student == null) return BadRequest("Aluno não existe!");
 
-      _context.Remove(student);
-      _context.SaveChanges();
+      _repo.Delete(student);
+      if(_repo.SaveChanges()) 
+        return  Ok(student);
 
-      return Ok(student);
+      return BadRequest("Aluno não foi cadastrado!");
     }
   }
 }
