@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.Data;
+using SmartSchool.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<SmartContext>(options =>
 //builder.Services.AddSingleton<IRepository, Repository>();
 //builder.Services.AddTransient<IRepository, Repository>();
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<UsuarioService>();
 
 var app = builder.Build();
 
