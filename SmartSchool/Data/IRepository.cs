@@ -14,14 +14,13 @@ namespace SmartSchool.Data
         void Delete<T>(T entity) where T : class;
         bool SaveChanges();
 
-        Student[] GetAllStudents();
-        Student[] GetStudentsByDisciplineId();
-        Student GetStudentById();
+        Student[] GetAllStudents(bool includeTeacher = false);
+        Student[] GetAllStudentsByDisciplineId(int studentId, bool includeTeacher = false);
+        Student GetStudentById(int studentId, bool includeTeacher = false);
 
-        Teacher[] GetAllTeachers();
-        Teacher[] GetTeachersByDisciplineId();
-        Teacher GetTeacherById();
-
+        Teacher[] GetAllTeachers(bool includeStudents = false);
+        Teacher[] GetAllTeachersByDisciplineId(int disciplineId, bool includeStudents = false);
+        Teacher GetTeacherById(int teacherId, bool includeTeacher = false);
 
     }
 }

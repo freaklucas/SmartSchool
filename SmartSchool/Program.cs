@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.Data;
 using SmartSchool.Services;
@@ -10,6 +11,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    });
 
 builder.Services.AddDbContext<SmartContext>(options =>
 {

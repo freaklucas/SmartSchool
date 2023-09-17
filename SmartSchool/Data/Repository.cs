@@ -7,61 +7,129 @@ using SmartSchool.Models;
 
 namespace SmartSchool.Data
 {
-    public class Repository : IRepository
+  public class Repository : IRepository
+  {
+    private readonly SmartContext _context;
+    public Repository(SmartContext context)
     {
-        private readonly SmartContext _context;
-        public Repository(SmartContext context)
-        {
-            _context = context;
-        }
-        public void Add<T>(T entity) where T : class {
-            _context.Add(entity);
-        }
-        public void Update<T>(T entity) where T : class {
-            _context.Update(entity);
-        }
-        public void Patch<T>(T entity) where T : class {
-            _context.Update(entity);
-        }
-        public void Delete<T>(T entity) where T : class {
-            _context.Remove(entity);
-        }
-
-        public Student[] GetAllStudents(bool includeDiscipline) {
-          IQueryable<Student> query = _context.Students;
-          if(includeDiscipline) {
-            query = query.Include(s => s.StudentsDisciplines)
-                    .ThenInclude(ad => ad.Discipline)
-                    .ThenInclude(dp => dp.Teacher);
-          }
-          query = query.AsNoTracking().OrderBy(s => s.Id);
-
-          return query.ToArray();
-        } 
-        
-        public Student GetStudentsByDisciplineId() {
-          throw new System.NotFiniteNumberException("Student is infinite");
-        }
-
-        public Student GetStudentById() {
-          throw new System.NotFiniteNumberException("Student is infinite");
-        }
-
-        public Teacher GetAllTeachers() {
-          throw new System.NotFiniteNumberException("Student is infinite");
-        }
-
-        public Teacher GetTeachersByDisciplineId() {
-          throw new System.NotFiniteNumberException("Student is infinite");
-        }
-
-        public Teacher GetTeacherById() {
-          throw new System.NotFiniteNumberException("Student is infinite");
-
-        }
-
-        public bool SaveChanges() {
-            return _context.SaveChanges() > 0;
-        }
+      _context = context;
     }
+    public void Add<T>(T entity) where T : class
+    {
+      _context.Add(entity);
+    }
+    public void Update<T>(T entity) where T : class
+    {
+      _context.Update(entity);
+    }
+    public void Patch<T>(T entity) where T : class
+    {
+      _context.Update(entity);
+    }
+    public void Delete<T>(T entity) where T : class
+    {
+      _context.Remove(entity);
+    }
+
+    public Student[] GetAllStudents(bool includeTeacher = false)
+    {
+      IQueryable<Student> query = _context.Students;
+      if (includeTeacher)
+      {
+        query = query.Include(s => s.StudentsDisciplines)
+                .ThenInclude(ad => ad.Discipline)
+                .ThenInclude(dp => dp.Teacher);
+      }
+      query = query.AsNoTracking().OrderBy(s => s.Id);
+
+      return query.ToArray();
+    }
+
+    public Student[] GetAllStudentsByDisciplineId(int studentId, bool includeTeacher = false)
+    {
+      IQueryable<Student> query = _context.Students;
+      if (includeTeacher)
+      {
+        query = query.Include(s => s.StudentsDisciplines)
+                .ThenInclude(ad => ad.Discipline)
+                .ThenInclude(dp => dp.Teacher);
+      }
+      query = query.AsNoTracking()
+                   .OrderBy(s => s.Id)
+                   .Where(
+                      student => student.StudentsDisciplines
+                    .Any(sd => sd.DisciplineId == studentId));
+
+      return query.ToArray();
+    }
+
+    public Student GetStudentById(int studentId, bool includeTeacher = false)
+    {
+      IQueryable<Student> query = _context.Students;
+      if (includeTeacher)
+      {
+        query = query.Include(s => s.StudentsDisciplines)
+                .ThenInclude(ad => ad.Discipline)
+                .ThenInclude(dp => dp.Teacher);
+      }
+      query = query.AsNoTracking()
+                   .OrderBy(s => s.Id)
+                   .Where(student => student.Id == studentId);
+
+      return query.FirstOrDefault();
+    }
+
+    public Teacher[] GetAllTeachers(bool includeStudents = false)
+    {
+      IQueryable<Teacher> query = _context.Teachers;
+      if (includeStudents)
+      {
+        query = query.Include(s => s.Disciplines)
+                .ThenInclude(d => d.StudentsDisciplines)
+                .ThenInclude(ad => ad.Student);
+      }
+      query = query.AsNoTracking().OrderBy(s => s.Id);
+
+      return query.ToArray();
+    }
+
+    public Teacher[] GetAllTeachersByDisciplineId(int disciplineId, bool includeStudents = false)
+    {
+      IQueryable<Teacher> query = _context.Teachers;
+      if (includeStudents)
+      {
+        query = query.Include(s => s.Disciplines)
+                .ThenInclude(d => d.StudentsDisciplines)
+                .ThenInclude(ad => ad.Student);
+      }
+      query = query.AsNoTracking()
+                   .OrderBy(al => al.Id)
+                   .Where(stud => stud.Disciplines.Any(
+                     d => d.StudentsDisciplines.Any(ad => ad.DisciplineId == disciplineId))
+                   );
+
+      return query.ToArray();
+    }
+
+    public Teacher GetTeacherById(int teacherId, bool includeTeacher = false)
+    {
+      IQueryable<Teacher> query = _context.Teachers;
+      if (includeTeacher)
+      {
+        query = query.Include(s => s.Disciplines)
+                .ThenInclude(d => d.StudentsDisciplines)
+                .ThenInclude(ad => ad.Student);
+      }
+      query = query.AsNoTracking()
+                   .OrderBy(al => al.Id)
+                   .Where(teac => teac.Id == teacherId);
+
+      return query.FirstOrDefault();
+    }
+
+    public bool SaveChanges()
+    {
+      return _context.SaveChanges() > 0;
+    }
+  }
 }
