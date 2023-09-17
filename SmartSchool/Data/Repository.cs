@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using SmartSchool.Models;
 
 namespace SmartSchool.Data
@@ -26,8 +27,16 @@ namespace SmartSchool.Data
             _context.Remove(entity);
         }
 
-        public Student GetAllStudents() {
-          throw new System.NotFiniteNumberException("Student is infinite");
+        public Student[] GetAllStudents(bool includeDiscipline) {
+          IQueryable<Student> query = _context.Students;
+          if(includeDiscipline) {
+            query = query.Include(s => s.StudentsDisciplines)
+                    .ThenInclude(ad => ad.Discipline)
+                    .ThenInclude(dp => dp.Teacher);
+          }
+          query = query.AsNoTracking().OrderBy(s => s.Id);
+
+          return query.ToArray();
         } 
         
         public Student GetStudentsByDisciplineId() {
