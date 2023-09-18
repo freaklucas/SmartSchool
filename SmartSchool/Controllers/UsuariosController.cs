@@ -22,17 +22,37 @@ namespace SmartSchool.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult <UsuarioDTO> Get(int id) {
+        public ActionResult<UsuarioDTO> Get(int id)
+        {
             return _usuarioService.GetUsuario(id);
         }
 
-[HttpGet("LastName")]
-public ActionResult<IEnumerable<UsuarioDTO>> GetByLastName(string lastName) {
-    var usuarios = _usuarioService.GetUsuariosByLastName(lastName);
-    if(usuarios != null && usuarios.Any())
-        return Ok(usuarios);
-    return NotFound("Nao existe ngm com nome igual!");
-}
+        [HttpGet("LastName")]
+        public ActionResult<IEnumerable<UsuarioDTO>> GetByLastName(string lastName)
+        {
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                return BadRequest("O sobrenome não pode ser vazio.");
+            }
+
+            var usuarios = _usuarioService.GetUsuariosByLastName(lastName);
+
+            if (usuarios == null || !usuarios.Any())
+            {
+                return NotFound("Não existe ninguém com esse sobrenome.");
+            }
+
+            var result = usuarios
+                .Where(u => u.LastName != null && u.LastName
+.Contains(lastName, StringComparison.OrdinalIgnoreCase));
+
+            if (!result.Any())
+            {
+                return NotFound("Não existe ninguém com esse sobrenome.");
+            }
+
+            return Ok(result);
+        }
 
     }
 }
