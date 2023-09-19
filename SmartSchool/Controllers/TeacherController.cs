@@ -19,7 +19,7 @@ namespace SmartSchool.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var result = _repo.GetAllTeachers(false);
+            var result = _repo.GetAllTeachers(true);
 
             return Ok(result);
         }
@@ -49,32 +49,33 @@ namespace SmartSchool.Controllers
         public IActionResult PutTeacher(int id, Teacher teacher)
         {
             var teacherExists = _repo.GetTeacherById(id);
-
-            _repo.Update(teacherExists);
+            if(teacherExists == null) return BadRequest("Professor não existe!");
+            _repo.Update(teacher);
             if(_repo.SaveChanges())  {
-                return Ok(teacherExists);
+                return Ok(teacher);
             }
 
-            return BadRequest("Professor não foi cadastrado!");
+            return BadRequest("Professor não atualizado!");
         }
 
         [HttpPatch("{id}")]
         public IActionResult PatchTeacher(int id, Teacher teacher)
         {
            var teacherExists = _repo.GetTeacherById(id);
-
-            _repo.Update(teacherExists);
+           if(teacherExists == null) return BadRequest("Professor não existe!");
+           ;
+            _repo.Update(teacher);
             if(_repo.SaveChanges())  {
-                return Ok(teacherExists);
+                return Ok(teacher);
             }
 
-            return BadRequest("Professor não foi cadastrado!");
+            return BadRequest("Professor não atualizado!");
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteTeacher(int id)
         {
-            var teacherExists = _repo.GetTeacherById(id);
+            var teacherExists = _repo.GetTeacherById(id, false);
             if(teacherExists == null) return BadRequest("Professor não existe!");
 
             _repo.Delete(teacherExists);
@@ -82,7 +83,7 @@ namespace SmartSchool.Controllers
                 return Ok(teacherExists + $"Deletado!");
             }
 
-            return BadRequest("Professor não foi cadastrado!");
+            return BadRequest("Professor não deletado!");
         }
     }
 }
