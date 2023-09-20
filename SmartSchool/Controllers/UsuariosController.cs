@@ -24,6 +24,29 @@ namespace SmartSchool.Controllers
         [HttpGet("{id}")]
         public ActionResult<UsuarioDTO> Get(int id)
         {
+            int [] valores = {1,2,3,5};
+            List <int> numeros = new List<int>();
+            numeros.Add(1);
+            numeros.Add(2);
+            
+            if(numeros!=null) {
+                foreach(int num in numeros) {
+                    Console.WriteLine(num);
+                } 
+            }
+
+            List<int> array = new List<int> {28, 19, 55};
+            int soma = array.Aggregate((v1, num) => v1+num);
+            Console.WriteLine("soma: " + soma);
+            bool isMaiorIdade = array.All(value => value > 18);
+            
+            var nomes = new List<string> {"Lucas", "Charlie", "Pedro"};
+
+            foreach(var nome in nomes) {
+                Console.WriteLine(nome);
+            }
+            
+
             return _usuarioService.GetUsuario(id);
         }
 
