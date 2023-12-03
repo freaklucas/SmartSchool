@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartSchool.WebAPI.Data;
 
@@ -10,9 +11,11 @@ using SmartSchool.WebAPI.Data;
 namespace SmartSchool.Migrations
 {
     [DbContext(typeof(SmartContext))]
-    partial class SmartContextModelSnapshot : ModelSnapshot
+    [Migration("20231202173522_AddDateEndToStudent")]
+    partial class AddDateEndToStudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
@@ -170,18 +173,6 @@ namespace SmartSchool.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("InitDate")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -193,9 +184,6 @@ namespace SmartSchool.Migrations
                     b.Property<string>("NumberPhone")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Registration")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.ToTable("Students");
@@ -204,79 +192,51 @@ namespace SmartSchool.Migrations
                         new
                         {
                             Id = 1,
-                            Ativo = true,
-                            BirthDate = new DateTime(2005, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7140),
                             LastName = "Kent",
                             Name = "Marta",
-                            NumberPhone = "33225555",
-                            Registration = 1
+                            NumberPhone = "33225555"
                         },
                         new
                         {
                             Id = 2,
-                            Ativo = true,
-                            BirthDate = new DateTime(2005, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7148),
                             LastName = "Isabela",
                             Name = "Paula",
-                            NumberPhone = "3354288",
-                            Registration = 2
+                            NumberPhone = "3354288"
                         },
                         new
                         {
                             Id = 3,
-                            Ativo = true,
-                            BirthDate = new DateTime(2005, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7151),
                             LastName = "Antonia",
                             Name = "Laura",
-                            NumberPhone = "55668899",
-                            Registration = 3
+                            NumberPhone = "55668899"
                         },
                         new
                         {
                             Id = 4,
-                            Ativo = true,
-                            BirthDate = new DateTime(2005, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7154),
                             LastName = "Maria",
                             Name = "Luiza",
-                            NumberPhone = "6565659",
-                            Registration = 4
+                            NumberPhone = "6565659"
                         },
                         new
                         {
                             Id = 5,
-                            Ativo = true,
-                            BirthDate = new DateTime(2005, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7158),
                             LastName = "Machado",
                             Name = "Lucas",
-                            NumberPhone = "565685415",
-                            Registration = 5
+                            NumberPhone = "565685415"
                         },
                         new
                         {
                             Id = 6,
-                            Ativo = true,
-                            BirthDate = new DateTime(2005, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7162),
                             LastName = "Alvares",
                             Name = "Pedro",
-                            NumberPhone = "456454545",
-                            Registration = 6
+                            NumberPhone = "456454545"
                         },
                         new
                         {
                             Id = 7,
-                            Ativo = true,
-                            BirthDate = new DateTime(2005, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7165),
                             LastName = "José",
                             Name = "Paulo",
-                            NumberPhone = "9874512",
-                            Registration = 7
+                            NumberPhone = "9874512"
                         });
                 });
 
@@ -332,139 +292,139 @@ namespace SmartSchool.Migrations
                         {
                             StudentId = 1,
                             DisciplineId = 2,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7187)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6103)
                         },
                         new
                         {
                             StudentId = 1,
                             DisciplineId = 4,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7189)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6111)
                         },
                         new
                         {
                             StudentId = 1,
                             DisciplineId = 5,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7190)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6112)
                         },
                         new
                         {
                             StudentId = 2,
                             DisciplineId = 1,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7191)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6113)
                         },
                         new
                         {
                             StudentId = 2,
                             DisciplineId = 2,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7192)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6115)
                         },
                         new
                         {
                             StudentId = 2,
                             DisciplineId = 5,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7229)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6117)
                         },
                         new
                         {
                             StudentId = 3,
                             DisciplineId = 1,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7230)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6118)
                         },
                         new
                         {
                             StudentId = 3,
                             DisciplineId = 2,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7231)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6119)
                         },
                         new
                         {
                             StudentId = 3,
                             DisciplineId = 3,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7231)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6121)
                         },
                         new
                         {
                             StudentId = 4,
                             DisciplineId = 1,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7233)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6123)
                         },
                         new
                         {
                             StudentId = 4,
                             DisciplineId = 4,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7234)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6124)
                         },
                         new
                         {
                             StudentId = 4,
                             DisciplineId = 5,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7235)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6125)
                         },
                         new
                         {
                             StudentId = 5,
                             DisciplineId = 4,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7235)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6126)
                         },
                         new
                         {
                             StudentId = 5,
                             DisciplineId = 5,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7236)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6127)
                         },
                         new
                         {
                             StudentId = 6,
                             DisciplineId = 1,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7237)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6128)
                         },
                         new
                         {
                             StudentId = 6,
                             DisciplineId = 2,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7238)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6130)
                         },
                         new
                         {
                             StudentId = 6,
                             DisciplineId = 3,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7238)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6131)
                         },
                         new
                         {
                             StudentId = 6,
                             DisciplineId = 4,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7240)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6133)
                         },
                         new
                         {
                             StudentId = 7,
                             DisciplineId = 1,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7241)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6134)
                         },
                         new
                         {
                             StudentId = 7,
                             DisciplineId = 2,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7242)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6135)
                         },
                         new
                         {
                             StudentId = 7,
                             DisciplineId = 3,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7242)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6136)
                         },
                         new
                         {
                             StudentId = 7,
                             DisciplineId = 4,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7243)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6137)
                         },
                         new
                         {
                             StudentId = 7,
                             DisciplineId = 5,
-                            DateInit = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(7244)
+                            DateInit = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(6138)
                         });
                 });
 
@@ -506,7 +466,7 @@ namespace SmartSchool.Migrations
                         {
                             Id = 1,
                             Ativo = true,
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(6758),
+                            InitDate = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(5632),
                             LastName = "Oliveira",
                             Name = "Lauro",
                             Registration = 1
@@ -515,7 +475,7 @@ namespace SmartSchool.Migrations
                         {
                             Id = 2,
                             Ativo = true,
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(6773),
+                            InitDate = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(5664),
                             LastName = "Soares",
                             Name = "Roberto",
                             Registration = 2
@@ -524,7 +484,7 @@ namespace SmartSchool.Migrations
                         {
                             Id = 3,
                             Ativo = true,
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(6774),
+                            InitDate = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(5666),
                             LastName = "Marconi",
                             Name = "Ronaldo",
                             Registration = 3
@@ -533,7 +493,7 @@ namespace SmartSchool.Migrations
                         {
                             Id = 4,
                             Ativo = true,
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(6775),
+                            InitDate = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(5667),
                             LastName = "Carvalho",
                             Name = "Rodrigo",
                             Registration = 4
@@ -542,7 +502,7 @@ namespace SmartSchool.Migrations
                         {
                             Id = 5,
                             Ativo = true,
-                            InitDate = new DateTime(2023, 12, 2, 15, 6, 47, 152, DateTimeKind.Local).AddTicks(6776),
+                            InitDate = new DateTime(2023, 12, 2, 14, 35, 21, 828, DateTimeKind.Local).AddTicks(5669),
                             LastName = "Montanha",
                             Name = "Alexandre",
                             Registration = 5

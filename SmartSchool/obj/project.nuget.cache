@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "33y7XjDTCI9TFbkB2sKEcaafxw2xYlbO0SVTtlVAM4lKFTvVRLaZ0HJ4acMOlBtZhrr1mUjOHVODzhuZNKsOcA==",
+  "dgSpecHash": "+PW5JqXFnQ+ckk67SPIeojlfC1xiYuoLED+cZwWhf2srXeJhXpFPZSYI92uV708ZH38e3DPp9GppAkjQXDepkQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\lucas\\Documents\\SmartSchool\\SmartSchool\\SmartSchool.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\lucas\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.9\\microsoft.aspnetcore.openapi.7.0.9.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.10\\microsoft.data.sqlite.core.7.0.10.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.10\\microsoft.entityframeworkcore.7.0.10.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.10\\microsoft.entityframeworkcore.abstractions.7.0.10.nupkg.sha512",

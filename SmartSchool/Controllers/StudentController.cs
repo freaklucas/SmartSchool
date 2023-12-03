@@ -1,6 +1,8 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.Data;
+using SmartSchool.DTO;
 using SmartSchool.Models;
 
 namespace SmartSchool.Controllers {
@@ -8,21 +10,23 @@ namespace SmartSchool.Controllers {
   [Route("api/[controller]")]
   public class StudentController : ControllerBase {
     public  readonly IRepository _repo;
-    public StudentController( IRepository repo) {      
+    public readonly IMapper _mapper;
+    public StudentController(IRepository repo, IMapper mapper) {      
       _repo = repo;
+      _mapper = mapper;
     }
 
     [HttpGet]
     public IActionResult Get(){
       var result = _repo.GetAllStudents(true);
-
-      return Ok(result);
+      
+      return Ok(_mapper.Map<IEnumerable<StudentDTO>>(result));
     }
 
     [HttpGet("{id}")]
     public IActionResult GetById(int id){
       var result = _repo.GetStudentById(id, false);
-      if(result == null) return BadRequest("Aluno não encontrado!"); 
+      if(result == null) return BadRequest("Aluno não encontrado!");
       
       return Ok(result);
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SmartSchool.Data;
 using SmartSchool.DTO;
+using SmartSchool.WebAPI.Data;
 
 namespace SmartSchool.Services
 {

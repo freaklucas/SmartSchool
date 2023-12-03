@@ -67,3 +67,6 @@ C:\Users\lucas\Documents\SmartSchool\SmartSchool\obj\Debug\net7.0\SmartSchool.pd
 C:\Users\lucas\Documents\SmartSchool\SmartSchool\obj\Debug\net7.0\SmartSchool.genruntimeconfig.cache
 C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\SmartSchool.pdb
 C:\Users\lucas\Documents\SmartSchool\SmartSchool\obj\Debug\net7.0\ref\SmartSchool.dll
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\obj\Debug\net7.0\SmartSchool.sourcelink.json
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

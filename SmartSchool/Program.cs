@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.Data;
 using SmartSchool.Services;
+using SmartSchool.WebAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,10 +23,15 @@ builder.Services.AddDbContext<SmartContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 //builder.Services.AddSingleton<IRepository, Repository>();
 //builder.Services.AddTransient<IRepository, Repository>();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<UsuarioService>();
+
+
 
 var app = builder.Build();
 
