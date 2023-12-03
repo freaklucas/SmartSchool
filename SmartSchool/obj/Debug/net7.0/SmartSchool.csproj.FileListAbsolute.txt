@@ -70,3 +70,13 @@ C:\Users\lucas\Documents\SmartSchool\SmartSchool\obj\Debug\net7.0\ref\SmartSchoo
 C:\Users\lucas\Documents\SmartSchool\SmartSchool\obj\Debug\net7.0\SmartSchool.sourcelink.json
 C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\dist\web.config
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\web.config
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\appsettings.Development.json
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\appsettings.json
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\dist\appsettings.Development.json
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\dist\appsettings.json
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\dist\SmartSchool.deps.json
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\dist\SmartSchool.runtimeconfig.json
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\SmartSchool.deps.json
+C:\Users\lucas\Documents\SmartSchool\SmartSchool\bin\Debug\net7.0\published\SmartSchool.runtimeconfig.json
