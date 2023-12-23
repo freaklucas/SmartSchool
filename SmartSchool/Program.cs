@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartSchool.Data;
 using SmartSchool.Services;
 using SmartSchool.WebAPI.Data;
+using SmartSchool.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(SmartSchoolProfile));
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {

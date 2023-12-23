@@ -27,41 +27,52 @@ namespace SmartSchool.Controllers {
     public IActionResult GetById(int id){
       var result = _repo.GetStudentById(id, false);
       if(result == null) return BadRequest("Aluno não encontrado!");
-      
-      return Ok(result);
+
+      var studentDto = _mapper.Map<StudentDTO>(result);
+      return Ok(studentDto);
     }
 
     [HttpPost]
-    public IActionResult PostStudent(Student student){
+    public IActionResult PostStudent(StudentDTO model)
+    {
+      var student = _mapper.Map<Student>(model);
+      
       _repo.Add(student);
-      if(_repo.SaveChanges()) {
-        return  Ok(student);
+      if(_repo.SaveChanges())
+      {
+        return Created($"/api/student/{model.Id}", _mapper.Map<StudentDTO>(student)); // created = retorna 201 = registro criado
       }
 
       return BadRequest("Aluno não foi cadastrado!");
     }
 
     [HttpPut("{id}")]
-    public IActionResult PutStudent(int id, Student student){
+    public IActionResult PutStudent(int id, StudentDTO model){
       var studentExists = _repo.GetStudentById(id);
+      if (studentExists == null) return BadRequest("Estudante não encontrado.");
+
+      _mapper.Map(model, studentExists);
       
-      _repo.Update(student);
+      _repo.Update(studentExists);
       if(_repo.SaveChanges()) {
-        return  Ok(student);
+        return Created($"/api/student/{model.Id}", _mapper.Map<StudentDTO>(studentExists));
       } 
 
-      return BadRequest("Aluno não foi cadastrado!");
+      return BadRequest("Aluno não atualizado!");
     }
     
     [HttpPatch("{id}")]
-    public IActionResult PatchStudent(int id, Student student){
+    public IActionResult PatchStudent(int id, StudentDTO model){
      var studentExists = _repo.GetStudentById(id);
+     _mapper.Map(model, studentExists);
       
-      _repo.Patch(student);
-      if(_repo.SaveChanges()) 
-        return  Ok(student);
+      _repo.Patch(studentExists);
+      if (_repo.SaveChanges())
+      {
+        return Created($"/api/student/{model.Id}", _mapper.Map<StudentDTO>(studentExists));
+      }
 
-      return BadRequest("Aluno não foi cadastrado!");
+      return BadRequest("Aluno não foi atualizado!");
     }
 
     
