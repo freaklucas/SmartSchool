@@ -31,5 +31,7 @@ public class SmartSchoolProfile : Profile
                 );
 
         CreateMap<StudentDTO, Student>();
+
+        CreateMap<Student, StudentRegisterDTO>().ReverseMap();
     }
 }

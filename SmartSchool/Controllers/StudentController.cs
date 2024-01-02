@@ -23,7 +23,13 @@ namespace SmartSchool.Controllers {
       return Ok(_mapper.Map<IEnumerable<StudentDTO>>(result));
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("getRegister")]
+    public IActionResult GetRegister()
+    {
+        return Ok(new StudentRegisterDTO());
+    }
+
+        [HttpGet("{id}")]
     public IActionResult GetById(int id){
       var result = _repo.GetStudentById(id, false);
       if(result == null) return BadRequest("Aluno não encontrado!");
@@ -33,21 +39,21 @@ namespace SmartSchool.Controllers {
     }
 
     [HttpPost]
-    public IActionResult PostStudent(StudentDTO model)
+    public IActionResult PostStudent(StudentRegisterDTO model)
     {
       var student = _mapper.Map<Student>(model);
       
       _repo.Add(student);
       if(_repo.SaveChanges())
       {
-        return Created($"/api/student/{model.Id}", _mapper.Map<StudentDTO>(student)); // created = retorna 201 = registro criado
+        return Created($"/api/student/{model.Id}", _mapper.Map<StudentDTO>(student));
       }
-
+        
       return BadRequest("Aluno não foi cadastrado!");
     }
 
     [HttpPut("{id}")]
-    public IActionResult PutStudent(int id, StudentDTO model){
+    public IActionResult PutStudent(int id, StudentRegisterDTO model){
       var studentExists = _repo.GetStudentById(id);
       if (studentExists == null) return BadRequest("Estudante não encontrado.");
 
@@ -62,7 +68,7 @@ namespace SmartSchool.Controllers {
     }
     
     [HttpPatch("{id}")]
-    public IActionResult PatchStudent(int id, StudentDTO model){
+    public IActionResult PatchStudent(int id, StudentRegisterDTO model){
      var studentExists = _repo.GetStudentById(id);
      _mapper.Map(model, studentExists);
       
