@@ -1,89 +1,89 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.Data;
+using SmartSchool.DTO;
 using SmartSchool.Models;
 
-namespace SmartSchool.Controllers
+namespace SmartSchool.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class TeacherController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TeacherController : ControllerBase
+    public readonly IRepository _repo;
+    public readonly IMapper _mapper;
+
+    public TeacherController(IRepository repo, IMapper mapper)
     {
-        public readonly IRepository _repo;
+        _repo = repo;
+        _mapper = mapper;
+    }
 
-        public TeacherController(IRepository repo)
-        {
-            _repo = repo;
-        }
+    [HttpGet]
+    public IActionResult Get()
+    {
+        var result = _repo.GetAllTeachers(true);
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var result = _repo.GetAllTeachers(true);
+        return Ok(_mapper.Map<IEnumerable<TeacherDTO>>(result));
+    }
 
-            return Ok(result);
-        }
+    [HttpGet("{id}")]
+    public IActionResult GetById(int id)
+    {
+        var result = _repo.GetTeacherById(id, false);
+        if (result == null) return BadRequest("Professor não encontrado!");
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var result = _repo.GetTeacherById(id, false);
-            if (result == null) return BadRequest("Professor não encontrado!");
+        var teacherDto = _mapper.Map<TeacherDTO>(result);
 
-            return Ok(result);
-        }
+        return Ok(teacherDto);
+    }
 
-        [HttpPost]
-        public IActionResult PostTeacher(Teacher teacher)
-        {
-            _repo.Add(teacher);
-            if (_repo.SaveChanges())
-            {
-                return Ok(teacher);
-            }
-            return BadRequest("Professor não foi cadastrado!");
+    // TODO: Fazer no post, put e patch
+    [HttpPost]
+    public IActionResult PostTeacher(TeacherDTO model)
+    {
+        var teacher = _mapper.Map<TeacherDTO>(model);
 
-        }
+        _repo.Add(teacher);
+        if (_repo.SaveChanges()) return Created($"/api/teacher/{model.Id}", _mapper.Map<TeacherDTO>(teacher));
+        return BadRequest("Professor não foi cadastrado!");
+    }
 
-        [HttpPut("{id}")]
-        public IActionResult PutTeacher(int id, Teacher teacher)
-        {
-            var teacherExists = _repo.GetTeacherById(id);
-            if(teacherExists == null) return BadRequest("Professor não existe!");
-            _repo.Update(teacher);
-            if(_repo.SaveChanges())  {
-                return Ok(teacher);
-            }
+    [HttpPut("{id}")]
+    public IActionResult PutTeacher(int id, TeacherDTO model)
+    {
+        var teacherExists = _repo.GetTeacherById(id);
+        if (teacherExists == null) return BadRequest("Professor não existe!");
+        _mapper.Map(model, teacherExists);
 
-            return BadRequest("Professor não atualizado!");
-        }
+        _repo.Update(teacherExists);
+        if (_repo.SaveChanges()) return Created($"/api/teacher/{model.Id}", _mapper.Map<TeacherDTO>(teacherExists));
 
-        [HttpPatch("{id}")]
-        public IActionResult PatchTeacher(int id, Teacher teacher)
-        {
-           var teacherExists = _repo.GetTeacherById(id);
-           if(teacherExists == null) return BadRequest("Professor não existe!");
-           ;
-            _repo.Update(teacher);
-            if(_repo.SaveChanges())  {
-                return Ok(teacher);
-            }
+        return BadRequest("Professor não atualizado!");
+    }
 
-            return BadRequest("Professor não atualizado!");
-        }
+    [HttpPatch("{id}")]
+    public IActionResult PatchTeacher(int id, TeacherDTO model)
+    {
+        var teacherExists = _repo.GetTeacherById(id);
+        _mapper.Map(model, teacherExists);
+        _repo.Patch(teacherExists);
 
-        [HttpDelete("{id}")]
-        public IActionResult DeleteTeacher(int id)
-        {
-            var teacherExists = _repo.GetTeacherById(id, false);
-            if(teacherExists == null) return BadRequest("Professor não existe!");
+        if (_repo.SaveChanges()) return Created($"/api/teacher/{model.Id}", _mapper.Map<TeacherDTO>(teacherExists));
 
-            _repo.Delete(teacherExists);
-            if(_repo.SaveChanges())  {
-                return Ok(teacherExists + $"Deletado!");
-            }
+        return BadRequest("Professor não atualizado!");
+    }
 
-            return BadRequest("Professor não deletado!");
-        }
+    [HttpDelete("{id}")]
+    public IActionResult DeleteTeacher(int id)
+    {
+        var teacherExists = _repo.GetTeacherById(id, false);
+        if (teacherExists == null) return BadRequest("Professor não existe!");
+
+        _repo.Delete(teacherExists);
+        if (_repo.SaveChanges()) return Ok(teacherExists + $"Deletado!");
+
+        return BadRequest("Professor não deletado!");
     }
 }

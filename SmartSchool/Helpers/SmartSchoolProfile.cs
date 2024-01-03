@@ -28,10 +28,18 @@ public class SmartSchoolProfile : Profile
             .ForMember(
                 dest => dest.BirthDate,
                 opt => opt.MapFrom(src => src.BirthDate.GetCurrentAge())
-                );
+            );
+
+        CreateMap<Teacher, TeacherDTO>()
+            .ForMember(
+                des => des.Name,
+                opt => opt.MapFrom(src => $"{src.Name} {src.LastName}")
+            );
 
         CreateMap<StudentDTO, Student>();
-
         CreateMap<Student, StudentRegisterDTO>().ReverseMap();
+
+        CreateMap<TeacherDTO, Teacher>();
+        CreateMap<Teacher, TeacherDTO>().ReverseMap();
     }
 }
