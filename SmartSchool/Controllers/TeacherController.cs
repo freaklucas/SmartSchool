@@ -28,6 +28,13 @@ public class TeacherController : ControllerBase
         return Ok(_mapper.Map<IEnumerable<TeacherDTO>>(result));
     }
 
+
+    [HttpGet("Testando")]
+    public IActionResult GetTeste()
+    {
+        return Ok(new TeacherRegisterDTO());
+    }
+
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
@@ -41,7 +48,7 @@ public class TeacherController : ControllerBase
 
     // TODO: Fazer no post, put e patch
     [HttpPost]
-    public IActionResult PostTeacher(TeacherDTO model)
+    public IActionResult PostTeacher(TeacherRegisterDTO model)
     {
         var teacher = _mapper.Map<TeacherDTO>(model);
 
@@ -51,7 +58,7 @@ public class TeacherController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult PutTeacher(int id, TeacherDTO model)
+    public IActionResult PutTeacher(int id, TeacherRegisterDTO model)
     {
         var teacherExists = _repo.GetTeacherById(id);
         if (teacherExists == null) return BadRequest("Professor não existe!");
@@ -64,7 +71,7 @@ public class TeacherController : ControllerBase
     }
 
     [HttpPatch("{id}")]
-    public IActionResult PatchTeacher(int id, TeacherDTO model)
+    public IActionResult PatchTeacher(int id, TeacherRegisterDTO model)
     {
         var teacherExists = _repo.GetTeacherById(id);
         _mapper.Map(model, teacherExists);
