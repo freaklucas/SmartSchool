@@ -10,31 +10,22 @@ public class SmartSchoolProfile : Profile
     {
         CreateMap<Student, StudentDTO>()
             .ForMember(
-                des => des.Name,
-                opt => opt.MapFrom(src => $"{src.Name} {src.LastName}")
-            )
-            .ForMember(
-                dest => dest.BirthDate,
-                opt => opt.MapFrom(src => src.BirthDate.GetCurrentAge())
-            );
-
-        CreateMap<Teacher, TeacherDTO>()
-            .ForMember(
-                des => des.Name,
+                des => des.FullName,
                 opt => opt.MapFrom(src => $"{src.Name} {src.LastName}")
             );
 
         CreateMap<StudentDTO, Student>();
         CreateMap<Student, StudentRegisterDTO>().ReverseMap();
 
-        CreateMap<Teacher, TeacherRegisterDTO>().ReverseMap();
+        CreateMap<Teacher, TeacherDTO>()
+            .ForMember(
+                des => des.Name,
+                opt => opt.MapFrom(src => $"{src.Name} {src.LastName}")
+            )
+            .ReverseMap();
+
+        CreateMap<TeacherRegisterDTO, Teacher>().ReverseMap();
 
         CreateMap<DisciplineDTO, Discipline>().ReverseMap();
-        
-        CreateMap<Teacher, TeacherDTO>().ReverseMap();
-
-        CreateMap<TeacherDTO, Teacher>();
-        
-        CreateMap<Teacher, TeacherDTO>().ReverseMap();
     }
 }
