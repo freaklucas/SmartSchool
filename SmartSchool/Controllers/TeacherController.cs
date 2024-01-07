@@ -23,7 +23,7 @@ public class TeacherController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        var result = _repo.GetAllTeachers(true);
+        var result = _repo.GetAllTeachers(false);
 
         return Ok(_mapper.Map<IEnumerable<TeacherDTO>>(result));
     }
